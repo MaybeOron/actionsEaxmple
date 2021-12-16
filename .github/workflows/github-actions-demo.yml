@@ -5,9 +5,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Load .env file
-        uses: xom9ikk/dotenv@v1.0.2
+        uses: c-py/action-dotenv-to-setenv@v2
         with:
-          path: ./.github/workflow/
+          env-file: .env
+#       - name: Load .env file
+#         uses: xom9ikk/dotenv@v1.0.2
+#         with:
+#           path: ./.github/workflow/
           #mode: development
       - name: Some other action
         run: |
