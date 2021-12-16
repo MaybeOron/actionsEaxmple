@@ -7,7 +7,7 @@ jobs:
       - name: Load .env file
         uses: c-py/action-dotenv-to-setenv@v2
         with:
-          env-file: .env
+          env-file: /.env
 #       - name: Load .env file
 #         uses: xom9ikk/dotenv@v1.0.2
 #         with:
