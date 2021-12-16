@@ -7,7 +7,7 @@ jobs:
       - name: Load .env file
         uses: xom9ikk/dotenv@v1.0.2
         with:
-          path: .
+          path: /.github/workflow/
           #mode: development
       - name: Some other action
         run: |
