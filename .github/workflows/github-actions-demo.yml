@@ -6,7 +6,7 @@ jobs:
     steps:
       - name: Load .env file
         id: dotenv
-        uses: ./.github/actions/dotenv-action
+        uses: ./env
       
       
 #         uses: c-py/action-dotenv-to-setenv@v2
