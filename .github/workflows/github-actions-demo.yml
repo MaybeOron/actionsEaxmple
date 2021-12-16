@@ -5,9 +5,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Load .env file
-        uses: c-py/action-dotenv-to-setenv@v2
-        with:
-          env-file: /.env
+        id: dotenv
+        uses: ./.github/actions/dotenv-action
+      
+      
+#         uses: c-py/action-dotenv-to-setenv@v2
+#         with:
+#           env-file: /.env
 #       - name: Load .env file
 #         uses: xom9ikk/dotenv@v1.0.2
 #         with:
@@ -15,9 +19,7 @@ jobs:
           #mode: development
       - name: Some other action
         run: |
-          echo "Variable 1: ${{ env.V1 }}"
-          echo "Variable 2: ${{ env.V2 }}"
-          echo "Variable 3: ${{ env.V3 }}"
+          echo "Variable 1: ${{ steps.dotenv.outputs.var1 }}"
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
