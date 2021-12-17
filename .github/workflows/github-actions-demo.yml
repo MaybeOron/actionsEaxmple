@@ -1,3 +1,4 @@
+
 name: GitHub Actions Demo
 on:
   push:
@@ -10,18 +11,23 @@ jobs:
     steps:
 
       - name: Check out repository code
-        uses: actions/checkout@v2       
+        uses: actions/checkout@v2
+        
       - name: Get branch name
         id: branch-name
-        uses: tj-actions/branch-names@v5        
+        uses: tj-actions/branch-names@v5
+        
       - uses: c-py/action-dotenv-to-setenv@v2
         with:
           env-file: .${{ steps.branch-name.outputs.current_branch }}env
-      - name: Set workflow vars
-        id: wfv
+
+      - name: Some other action
+        id: vars
         run: |
           echo "::set-output name=my_var::$V1"
+      
+      - name: Use variable setup in previous step
+        run: echo "I'm using variable ${{ steps.vars.outputs.my_var }}"
         
       - name: this name is from ${{ steps.vars.outputs.my_var }}"
-        run: echo "I'm using variable ${{ steps.wfv.outputs.my_var }}"
-
+        run: echo "I'm using variable ${{ steps.vars.outputs.my_var }}"
