@@ -26,5 +26,5 @@ jobs:
         run: |
           echo "::set-output name=my_var::$V1"
 
-      - name: this is a var -> ${{ steps.vars.outputs.my_var }}"
+      - name: this is a var -> ${{ steps.vars.outputs.my_var }}
         run: echo "I'm using variable ${{ steps.vars.outputs.my_var }}"
