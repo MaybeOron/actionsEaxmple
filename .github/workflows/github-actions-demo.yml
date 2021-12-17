@@ -8,9 +8,7 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-#       - name: Load .env file
-#         id: dotenv
-#         uses: ./vars.sh
+
       - name: Check out repository code
         uses: actions/checkout@v2
         
@@ -21,13 +19,7 @@ jobs:
       - uses: c-py/action-dotenv-to-setenv@v2
         with:
           env-file: .${{ steps.branch-name.outputs.current_branch }}env
-          
-#               env-file: .github/workflows/.env
-#       - name: Load .env file
-#         uses: xom9ikk/dotenv@v1.0.2
-#         with:
-#           path: ./.github/workflow/
-          #mode: development
+
       - name: Some other action
         run: |
           echo "Variable 1: $V1"
