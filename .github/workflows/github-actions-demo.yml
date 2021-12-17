@@ -8,8 +8,6 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
 #       - name: Load .env file
 #         id: dotenv
 #         uses: ./vars.sh
@@ -25,6 +23,8 @@ jobs:
 #         with:
 #           path: ./.github/workflow/
           #mode: development
+      - name: Check out repository code
+        uses: actions/checkout@v2
       - name: Some other action
         run: |
           echo "Variable 1: $V1"
