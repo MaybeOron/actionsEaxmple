@@ -9,14 +9,14 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: Load .env file
-        id: dotenv
-        uses: ./vars.sh
+#       - name: Load .env file
+#         id: dotenv
+#         uses: ./vars.sh
       
       
-#         uses: c-py/action-dotenv-to-setenv@v2
-#         with:
-#           env-file: /.env
+      - uses: c-py/action-dotenv-to-setenv@v2
+        with:
+          env-file: /.env
 #       - name: Load .env file
 #         uses: xom9ikk/dotenv@v1.0.2
 #         with:
