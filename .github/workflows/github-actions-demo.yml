@@ -20,7 +20,7 @@ jobs:
         
       - uses: c-py/action-dotenv-to-setenv@v2
         with:
-          env-file: .${{ steps.branch-name.outputs.current_branch }}}env
+          env-file: .${{ steps.branch-name.outputs.current_branch }}env
           
 #               env-file: .github/workflows/.env
 #       - name: Load .env file
