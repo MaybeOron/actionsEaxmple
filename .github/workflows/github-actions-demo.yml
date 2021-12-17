@@ -1,12 +1,15 @@
 name: GitHub Actions Demo
 on: [push]
+
+env:
+  var1: Var1
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - name: Load .env file
-        id: dotenv
-        uses: ./env
+#       - name: Load .env file
+#         id: dotenv
+#         uses: ./env
       
       
 #         uses: c-py/action-dotenv-to-setenv@v2
@@ -19,7 +22,7 @@ jobs:
           #mode: development
       - name: Some other action
         run: |
-          echo "Variable 1: ${{ steps.dotenv.outputs.var1 }}"
+          echo "Variable 1: $var1"
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
