@@ -16,7 +16,7 @@ jobs:
       
       - uses: c-py/action-dotenv-to-setenv@v2
         with:
-          env-file: .${{ GITHUB_REF##*/ }}env
+          env-file: .${{ github.ref }}env
           
 #               env-file: .github/workflows/.env
 #       - name: Load .env file
