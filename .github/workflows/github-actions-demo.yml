@@ -26,7 +26,7 @@ jobs:
           echo "Variable 1: $V1"
           echo "Variable 2: $V2"
           echo "Variable 3: $V3"
-          echo "::set-output name=my_var::thisVar"
+          echo "::set-output name=my_var::$V1"
       - run: echo " env $V1 $V2 event."
       
       - name: Use variable setup in previous step
