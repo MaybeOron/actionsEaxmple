@@ -11,7 +11,8 @@ jobs:
 #       - name: Load .env file
 #         id: dotenv
 #         uses: ./vars.sh
-      
+      - name: Check out repository code
+        uses: actions/checkout@v2
       
       - uses: c-py/action-dotenv-to-setenv@v2
         with:
@@ -23,8 +24,6 @@ jobs:
 #         with:
 #           path: ./.github/workflow/
           #mode: development
-      - name: Check out repository code
-        uses: actions/checkout@v2
       - name: Some other action
         run: |
           echo "Variable 1: $V1"
