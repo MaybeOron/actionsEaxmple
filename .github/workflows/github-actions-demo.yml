@@ -13,10 +13,14 @@ jobs:
 #         uses: ./vars.sh
       - name: Check out repository code
         uses: actions/checkout@v2
-      
+        
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v5
+        
       - uses: c-py/action-dotenv-to-setenv@v2
         with:
-          env-file: .${{ github.ref }}env
+          env-file: .${{ steps.branch-name.outputs.current_branch }}}env
           
 #               env-file: .github/workflows/.env
 #       - name: Load .env file
