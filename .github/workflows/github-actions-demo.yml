@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - branch: refs/heads/BRANCH2
+          - this: that
           
     runs-on: ubuntu-latest
     steps:
