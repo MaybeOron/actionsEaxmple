@@ -10,7 +10,6 @@ jobs:
       matrix:
         include:
           - branch: refs/heads/BRANCH2
-          - branch: refs/heads/main
           
     runs-on: ubuntu-latest
     steps:
