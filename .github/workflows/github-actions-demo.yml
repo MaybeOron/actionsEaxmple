@@ -1,11 +1,18 @@
+
 name: GitHub Actions Demo
 on:
   push:
-    branches: ["main", "BRANCH2"]
+    branches: ["BRANCH2","main"]
 env:
   var1: Var1
 jobs:
   Explore-GitHub-Actions:
+    strategy:
+      matrix:
+        include:
+          - branch: refs/heads/BRANCH2
+          - branch: refs/heads/main
+          
     runs-on: ubuntu-latest
     steps:
 
@@ -21,17 +28,9 @@ jobs:
           env-file: .${{ steps.branch-name.outputs.current_branch }}env
 
       - name: Some other action
+        id: vars
         run: |
-          echo "Variable 1: $V1"
-          echo "Variable 2: $V2"
-          echo "Variable 3: $V3"
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          echo "::set-output name=my_var::$V1"
 
+      - name: this is a var -> ${{ steps.vars.outputs.my_var }}
+        run: echo "I'm using variable ${{ steps.vars.outputs.my_var }}"
