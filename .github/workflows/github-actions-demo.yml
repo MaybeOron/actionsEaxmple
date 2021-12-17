@@ -1,12 +1,17 @@
-
-name: Actions Demo
+name: GitHub Actions Demo
 on:
   push:
     branches: ["BRANCH2","main"]
-
+env:
+  var1: Var1
 jobs:
-  GitHub-Actions:
-        
+  Explore-GitHub-Actions:
+    strategy:
+      matrix:
+        include:
+          - branch: refs/heads/BRANCH2
+          - branch: refs/heads/main
+          
     runs-on: ubuntu-latest
     steps:
 
@@ -25,6 +30,5 @@ jobs:
         id: vars
         run: |
           echo "::set-output name=my_var::$V1"
-
       - name: this is a var -> ${{ steps.vars.outputs.my_var }}
-        run: echo "I'm using variable ${{ steps.vars.outputs.my_var }}"
+        run: echo "I'm using branch ${{ github.ref }}"
