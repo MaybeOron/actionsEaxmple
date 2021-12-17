@@ -1,18 +1,12 @@
 
-name: GitHub Actions Demo
+name: Actions Demo
 on:
   push:
     branches: ["BRANCH2","main"]
-env:
-  var1: Var1
+
 jobs:
-  Explore-GitHub-Actions:
-    strategy:
-      matrix:
-        include:
-          - branch: refs/heads/BRANCH2
-          - branch: refs/heads/main
-          
+  GitHub-Actions:
+        
     runs-on: ubuntu-latest
     steps:
 
