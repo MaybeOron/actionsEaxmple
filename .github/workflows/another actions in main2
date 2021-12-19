@@ -2,7 +2,7 @@ name: another actions in main2
 on:
   push:
     branches: ["main2"]
-    
+   
 env:
   var1: Var1
 jobs:
