@@ -1,7 +1,7 @@
 name: GitHub Actions Demo
 on:
   push:
-    branches: ["main","main2","main3"]
+    branches: ["main","main2","main3"] 
 env:
   var1: Var1
 jobs:
