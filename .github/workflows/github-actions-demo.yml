@@ -3,7 +3,8 @@ on:
   push:
     branches: ["main","main2","main3"]
 env:
-  var1: Var1
+  jobvar1: this-is-a-job-var-1
+  jobvar2: this-is-a-job-var-2
 jobs:
   Explore-GitHub-Actions:
     strategy:
@@ -31,3 +32,5 @@ jobs:
           echo "::set-output name=my_var::$V1"
       - name: this is a var -> ${{ steps.vars.outputs.my_var }}
         run: echo "I'm using branch ${{ github.ref }}"
+      - name: this is a var -> ${{ env.jobvar2 }}
+        run: echo "another job var ${{ env.jobvar2 }}"
