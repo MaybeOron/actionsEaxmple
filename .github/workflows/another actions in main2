@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - this: that
+          - this: that2
           
     runs-on: ubuntu-latest
     steps:
