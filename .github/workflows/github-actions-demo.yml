@@ -1,7 +1,7 @@
 name: GitHub Actions Demo
 on:
   push:
-    branches: ["main","main2","main3"]
+    branches: ["main2","main3"]
 env:
   jobvar1: this-is-a-job-var-1
   jobvar2: this-is-a-job-var-2
@@ -32,5 +32,5 @@ jobs:
           echo "::set-output name=my_var::$V1"
       - name: this is a var -> ${{ steps.vars.outputs.my_var }}
         run: echo "I'm using branch ${{ github.ref }}"
-      - name: this is a var -> ${{ env.jobvar2 }}
+      - name: this is a var -> ${{ env.jobvar1 }}
         run: echo "another job var ${{ env.jobvar2 }}"
