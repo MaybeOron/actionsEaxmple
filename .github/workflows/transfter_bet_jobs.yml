@@ -1,5 +1,5 @@
-name: transfter_bet_jobs
-
+name: transfter jobs var
+on:
   workflow_dispatch:
   
 jobs:
