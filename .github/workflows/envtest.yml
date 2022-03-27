@@ -5,30 +5,14 @@ jobs:
 
   e2e-terraform-apply:
     runs-on: ubuntu-latest
-    outputs:
-      env: ${{ steps.output_env.outputs.env }}
-      url: ${{ steps.output_env.outputs.url }}
     steps:
       - name: Check out Terraform repo
         uses: actions/checkout@v2     
       - name: Terraform workspace - apply with sha and branch
         id: output_env
         run: |
-          deploy_env="aaaaa"
-          deploy_url="bbbbb"
-          echo "::set-output name=url::$deploy_url"
-          echo " deploy url $deploy_url"
-          echo " deploy env $deploy_env"
-          echo "::set-output name=env::$deploy_env"
-
-  e2e-cypress-chrome-test:
-    needs: e2e-terraform-apply
-    - name: Terraform workspace - apply with sha and branch
-        id: output_env
-        run: |
-          echo " ENV VARS"
-      
-        env:         
-          cypress_environment: ${{ needs.e2e-terraform-apply.outputs.url }}
-          cypress_url: "https://${{ needs.e2e-terraform-apply.outputs.url }}.d1r713nb7ryy8w.amplifyapp.com/"  #"https://master.d1r713nb7ryy8w.dpqrylqmskoas.amplifyapp.com/"
-        
+          is_snyk=$(echo "text snyk text" | grep -oe \\[Snyk\\]* )
+          if [ ! -z "$is_snyk" ]; then
+             echo "This PR iscreated by Snyk"
+             exit 0
+          fi
