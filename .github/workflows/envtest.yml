@@ -4,7 +4,6 @@ on: [push]
 jobs:
   build-push-deploy-validate:
     strategy:
-      fail-fast: false
       matrix:
         include:
           - branch: master
@@ -37,11 +36,11 @@ jobs:
            .github/workflows/dir/script.sh
 
       - name: Slack Notification - suceeded
-        if: ${{ 'master' == matrix.branch }} && steps.validator.conclusion == 'success'
+        if: ${{ 'master' == matrix.branch }} && steps.validator.outcome == 'success'
         run: |
           echo "good"
 
       - name: Slack Notification - failed
-        if: ${{ 'master' == matrix.branch }} && steps.validator.conclusion == 'failure'
+        if: ${{ 'master' == matrix.branch }} && steps.validator.outcome == 'failure'
         run: |
           echo "bad"     
