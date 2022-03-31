@@ -20,7 +20,7 @@ jobs:
            echo "$haha is from the script"
   
       - name: Terraform
-        if: steps.output_env.outcome == 'failure'
+        if: failure() && steps.output_env.outcome == 'failure'
         run: |
            echo "DESCALING"
           
