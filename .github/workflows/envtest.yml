@@ -18,4 +18,9 @@ jobs:
            chmod +x .github/workflows/dir/script.sh
            .github/workflows/dir/script.sh
            echo "$haha is from the script"
+  
+      - name: Terraform
+        if: steps.output_env.outcome == 'failure'
+        run: |
+           echo "DESCALING"
           
