@@ -4,6 +4,7 @@ on: [push]
 jobs:
   build-push-deploy-validate:
     strategy:
+      fail-fast: false
       matrix:
         include:
           - branch: master
