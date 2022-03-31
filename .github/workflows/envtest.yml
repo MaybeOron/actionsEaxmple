@@ -41,6 +41,6 @@ jobs:
           echo "good"
 
       - name: Slack Notification - failed
-        if: ${{ 'master' == matrix.branch && steps.validator.outcome != 'success' }}
+        if: ${{ 'master' == matrix.branch && steps.validator.outcome == 'failure' }}
         run: |
           echo "bad"     
