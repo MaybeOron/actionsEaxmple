@@ -27,6 +27,7 @@ jobs:
       - name: Task Vaildation
         id: validator
         shell: bash
+        continue-on-error: true
         env:
            cluster: ${{ matrix.cluster }}
            service: ${{ matrix.service }}
