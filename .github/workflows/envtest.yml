@@ -6,8 +6,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - branch: refs/heads/master
-          - branch: refs/heads/master
+          - branch: master
+          - branch: master
 
     runs-on: ubuntu-latest
     steps:
@@ -29,11 +29,11 @@ jobs:
            .github/workflows/dir/script.sh
 
       - name: Slack Notification - suceeded
-        if: ${{ 'refs/heads/master' == matrix.branch }} && steps.validator.outcome == 'success'
+        if: ${{ 'master' == matrix.branch }} && steps.validator.outcome == 'success'
         run: |
           echo "good"
 
       - name: Slack Notification - failed
-        if: ${{ 'refs/heads/master' == matrix.branch }} && always() && failure()
+        if: ${{ 'master' == matrix.branch }} && always()
         run: |
           echo "bad"     
