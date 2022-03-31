@@ -9,11 +9,10 @@ jobs:
       - name: Check out Terraform repo
         uses: actions/checkout@v2     
       - name: Terraform workspace - apply with sha and branch
+        env:
+          var: megavar
         id: output_env
         run: |
-          is_snyk=$(echo "[Snyk] asdasd" | grep -oe "\[Snyk\].*" )
-          echo $is_snyk
-          if [ ! -z "$is_snyk" ]; then
-             echo "This PR iscreated by Snyk"
-             exit 0
-          fi
+           chmod +x .github/workflows/dir/script.sh
+           .github/workflows/dir/script.sh
+          
