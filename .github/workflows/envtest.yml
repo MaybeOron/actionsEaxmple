@@ -14,5 +14,5 @@ jobs:
         id: output_env
         run: |
            chmod +x .github/workflows/dir/script.sh
-           .github/workflows/dir/script.sh
+           bash -eux .github/workflows/dir/script.sh
           
