@@ -2,25 +2,38 @@ name: PR e2e
 on: [push]
 
 jobs:
+  build-push-deploy-validate:
+    strategy:
+      matrix:
+        include:
+          - branch: refs/heads/master
+          - branch: refs/heads/master
 
-  e2e-terraform-apply:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out Terraform repo
-        uses: actions/checkout@v2     
-      - name: Terraform workspace - apply with sha and branch
+      # Check out code
+      - name: Checkout
+        if: ${{ github.ref == matrix.branch }}
+        uses: actions/checkout@v2
+
+      - uses: actions/checkout@v2
+      - name: Task Vaildation
+        id: validator
+        shell: bash
         env:
-          cluster: CLUSTER
-          service: SERVICE
-          bool: true
-        id: output_env
+           cluster: ${{ matrix.cluster }}
+           service: ${{ matrix.service }}
+           should_descale: ${{ matrix.should_descale }}
         run: |
-           chmod +x .github/workflows/dir/script.sh
-           .github/workflows/dir/script.sh
-           echo "$haha is from the script"
-  
-      - name: Terraform
-        if: failure() && steps.output_env.outcome == 'failure'
+           chmod +x .github/workflows/tasks_validation.sh
+           .github/workflows/tasks_validation.sh
+
+      - name: Slack Notification - suceeded
+        if: ${{ 'refs/heads/master' == matrix.branch }} && steps.validator.outcome == 'success'
         run: |
-           echo "DESCALING"
-          
+          echo "good"
+
+      - name: Slack Notification - failed
+        if: ${{ 'refs/heads/master' == matrix.branch }} && failure() && steps.validator.outcome == 'failure'
+        run: |
+          echo "bad"     
