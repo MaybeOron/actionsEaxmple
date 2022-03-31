@@ -36,11 +36,11 @@ jobs:
            .github/workflows/dir/script.sh
 
       - name: Slack Notification - suceeded
-        if: ${{ 'master' == matrix.branch }} && steps.validator.outcome == 'success'
+        if: ${{ 'master' == matrix.branch && steps.validator.outcome == 'success' }}
         run: |
           echo "good"
 
       - name: Slack Notification - failed
-        if: ${{ 'master' == matrix.branch }} && steps.validator.outcome != 'success'
+        if: ${{ 'master' == matrix.branch && steps.validator.outcome != 'success' }}
         run: |
           echo "bad"     
