@@ -37,7 +37,7 @@ jobs:
 
       - name: get exit code
         run: |
-          echo "validation exit code:" && cat validation_exitcode.txt
+          echo "validation status:" && echo validation_exitcode.txt
 
       - name: Slack Notification - suceeded
         if: ${{ 'master' == matrix.branch && steps.validator.outcome == 'success' }}
