@@ -40,6 +40,13 @@ jobs:
           echo " ~~~~~~~~~ "
           echo ${{ matrix.cluster }}.${{ matrix.service }}.txt
 
+      - name: MABYE EMTER
+        if: ${{ 'master' == matrix.branch && steps.validator.outcome == 'failure' && matrix.bool == 'true' }}
+        run: |
+          echo " ~~~~~~~~~ "
+          echo "failed and true"
+
+
       - name: Slack Notification - suceeded
         if: ${{ 'master' == matrix.branch && steps.validator.outcome == 'success' }}
         run: |
