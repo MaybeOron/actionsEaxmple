@@ -2,5 +2,5 @@
 echo "this cluster is from github actions: $cluster"
 echo "this service is from github actions: $service"
 echo "this variable is from github actions: $bool"
-echo "should descale" > validation_exitcode.txt
+echo "should descale" > $cluster.$service.txt
 exit 1
