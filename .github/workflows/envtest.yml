@@ -35,6 +35,10 @@ jobs:
            chmod +x .github/workflows/dir/script.sh
            .github/workflows/dir/script.sh
 
+      - name: get exit code
+        run: |
+          echo "validation exit code:" && cat validation_exitcode.txt
+
       - name: Slack Notification - suceeded
         if: ${{ 'master' == matrix.branch && steps.validator.outcome == 'success' }}
         run: |
