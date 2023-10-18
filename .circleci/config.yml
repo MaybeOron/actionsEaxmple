@@ -81,7 +81,7 @@ jobs:
           command: |
             ls
             ls /tmp/workspace
-            cat *
+            cat /tmp/workspace/*
 
 
 workflows:
