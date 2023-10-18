@@ -80,7 +80,10 @@ jobs:
                 echo "oooooooooo" >> "\$file"
             done
             echo "~~~~"
-      - *persist_to_workspace
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - '*'
 
   list-files:
     executor: default-executor
