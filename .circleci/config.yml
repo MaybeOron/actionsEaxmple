@@ -28,8 +28,8 @@ jobs:
       - run:
           name: Copy and update file1 to file2
           command: |
-            cp $CIRCLE_WORKING_DIRECTORY/workspace/file1 $CIRCLE_WORKING_DIRECTORY/workspace/file2
-            echo "2222222" > $CIRCLE_WORKING_DIRECTORY/workspace/file2
+            cp /workspace/file1 /workspace/file2
+            echo "2222222" > workspace/file2
       - persist_to_workspace:
           root: workspace
           paths:
@@ -43,7 +43,7 @@ jobs:
           at: workspace
       - run:
           name: List files in workspace
-          command: ls $CIRCLE_WORKING_DIRECTORY/workspace
+          command: ls workspace
 
 
 workflows:
