@@ -24,14 +24,14 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: workspace
+          at: /tmp/workspace
       - run:
           name: Copy and update file1 to file2
           command: |
-            cp /workspace/file1 /workspace/file2
+            cp /tmp/workspace/file1 /tmp/workspace/file2
             echo "2222222" > workspace/file2
       - persist_to_workspace:
-          root: workspace
+          root: /tmp/workspace
           paths:
             - file2
 
@@ -40,10 +40,10 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: workspace
+          at: /tmp/workspace
       - run:
           name: List files in workspace
-          command: ls workspace
+          command: ls /tmp/workspace
 
 
 workflows:
