@@ -78,6 +78,7 @@ jobs:
             ls /tmp/workspace/
             echo "~~~~"
             for file in /tmp/workspace/*; do
+                echo "file name: ~$file~"
                 echo "<< pipeline.parameters.text >>" >> "$file"
             done
             echo "~~~~"
