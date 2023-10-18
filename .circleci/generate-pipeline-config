@@ -76,9 +76,11 @@ jobs:
           name: update
           command: |
             ls /tmp/workspace/
+            echo "~~~~"
             for file in /tmp/workspace/*; do
-                echo "<< pipeline.parameters.text >>" >> $file
+                echo "<< pipeline.parameters.text >>" >> "$file"
             done
+            echo "~~~~"
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
