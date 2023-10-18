@@ -12,59 +12,87 @@ executors:
     docker:
       - image: cimg/python:3.8
 
-parameters:
-  text:
-    type: string
-    default: "EXAMPLE"
+# parameters:
+#   text:
+#     type: string
+#     default: "EXAMPLE"
+
+
+commands: 
+  add-file:
+      description: add file with params
+      parameters:
+        file_name:
+          type: string
+        text:
+          type: string
+      steps:
+        - checkout
+        - run:
+            name: Create file
+            command: |
+              mkdir -p workspace
+              echo "<< parameters.text >>" > workspace/<< parameters.file_name >>-<< pipeline.number >>
+              ls workspace/
+              cat workspace/<< parameters.file_name >>-<< pipeline.number >>
+        - persist_to_workspace:
+            root: workspace
+            paths:
+              - '*'
 
 jobs:
   create-file1:
     executor: default-executor
     steps:
-      - checkout
-      - run:
-          name: Create file1
-          command: |
-            mkdir -p workspace
-            echo -n "1111111" > workspace/file1-<< pipeline.number >>
-            ls workspace/
-            cat workspace/file1-<< pipeline.number >>
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - '*'
+      - add-file:
+          file_name: f1
+          text: t1
 
   create-file2:
     executor: default-executor
     steps:
-      - checkout
-      - run:
-          name: Create file2
-          command: |
-            mkdir -p workspace
-            echo "222222" > workspace/file2-<< pipeline.number >>
-            ls workspace/
-            cat workspace/file2-<< pipeline.number >>
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - '*'
+      - add-file:
+          file_name: f2
+          text: t2
 
   create-file3:
     executor: default-executor
     steps:
-      - checkout
-      - run:
-          name: Create file3
-          command: |
-            mkdir -p workspace
-            echo "333333" > workspace/file3-<< pipeline.number >>
-            ls workspace/
-            cat workspace/file3-<< pipeline.number >>
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - '*'
+      - add-file:
+          file_name: f3
+          text: t3
+
+  # create-file2:
+  #   executor: default-executor
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Create file2
+  #         command: |
+  #           mkdir -p workspace
+  #           echo "222222" > workspace/file2-<< pipeline.number >>
+  #           ls workspace/
+  #           cat workspace/file2-<< pipeline.number >>
+  #     - persist_to_workspace:
+  #         root: workspace
+  #         paths:
+  #           - '*'
+
+  # create-file3:
+  #   executor: default-executor
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Create file3
+  #         command: |
+  #           mkdir -p workspace
+  #           echo "333333" > workspace/file3-<< pipeline.number >>
+  #           ls workspace/
+  #           cat workspace/file3-<< pipeline.number >>
+  #     - persist_to_workspace:
+  #         root: workspace
+  #         paths:
+  #           - '*'
 
   update-file:
     executor: default-executor
