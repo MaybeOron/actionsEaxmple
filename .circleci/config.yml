@@ -1,23 +1,56 @@
 version: 2.1
+executors:
+  default-executor:
+    docker:
+      - image: cimg/python:3.8
 
-# Define the jobs we want to run for this project
 jobs:
-  build:
-    docker:
-      - image: cimg/base:2023.03
-    steps:
-      - checkout
-      - run: echo "this is the build job"
-  test:
-    docker:
-      - image: cimg/base:2023.03
-    steps:
-      - checkout
-      - run: echo "this is the test job"
+  - create-file:
+      executor: default-executor
+      steps:
+        - checkout
+        - run:
+            name: Create file1
+            command: echo "1111111" > workspace/file1
+        - persist_to_workspace:
+            root: workspace
+            paths:
+              - file1
 
-# Orchestrate our job run sequence
+  - update-file:
+      executor: default-executor
+      steps:
+        - checkout
+        - attach_workspace:
+            at: workspace
+        - run:
+            name: Copy and update file1 to file2
+            command: |
+              cp $CIRCLE_WORKING_DIRECTORY/workspace/file1 $CIRCLE_WORKING_DIRECTORY/workspace/file2
+              echo "2222222" > $CIRCLE_WORKING_DIRECTORY/workspace/file2
+        - persist_to_workspace:
+            root: workspace
+            paths:
+              - file2
+
+  - list-files:
+      executor: default-executor
+      steps:
+        - checkout
+        - attach_workspace:
+            at: workspace
+        - run:
+            name: List files in workspace
+            command: ls $CIRCLE_WORKING_DIRECTORY/workspace
+
 workflows:
-  build_and_test:
+  version: 2
+  build:
     jobs:
-      - build
-      - test
+      - create-file
+      - update-file:
+          requires:
+            - create-file
+      - list-files:
+          requires:
+            - update-file
