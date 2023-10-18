@@ -77,7 +77,7 @@ jobs:
           command: |
             ls /tmp/workspace/
             for file in /tmp/workspace/*; do
-                echo "<< pipeline.parameters.text >>" >> "$file"
+                echo "<< pipeline.parameters.text >>" >> $file
             done
       - persist_to_workspace:
           root: /tmp/workspace
