@@ -13,8 +13,8 @@ jobs:
           name: Create file1
           command: |
             mkdir -p workspace
-            echo "1111111" > workspace/file1-${CIRCLE_BUILD_NUM
-            cat workspace/file1-${CIRCLE_BUILD_NUM
+            echo "1111111" > workspace/file1-${CIRCLE_BUILD_NUM}
+            cat workspace/file1-${CIRCLE_BUILD_NUM}
       - persist_to_workspace:
           root: workspace
           paths:
@@ -29,8 +29,8 @@ jobs:
       - run:
           name: Copy and update file1 to file2
           command: |
-            cp /tmp/workspace/file1-${CIRCLE_BUILD_NUM /tmp/workspace/file2-${CIRCLE_BUILD_NUM
-            echo "2222222" > /tmp/workspace/file2-${CIRCLE_BUILD_NUM
+            cp /tmp/workspace/file1-${CIRCLE_BUILD_NUM} /tmp/workspace/file2-${CIRCLE_BUILD_NUM}
+            echo "2222222" > /tmp/workspace/file2-${CIRCLE_BUILD_NUM}
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
