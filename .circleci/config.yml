@@ -48,9 +48,3 @@ workflows:
   build:
     jobs:
       - create-file
-      - update-file:
-          requires:
-            - create-file
-      - list-files:
-          requires:
-            - update-file
