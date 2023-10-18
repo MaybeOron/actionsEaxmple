@@ -5,17 +5,17 @@ executors:
       - image: cimg/python:3.8
 
 jobs:
-  - create-file:
-      executor: default-executor
-      steps:
-        - checkout
-        - run:
-            name: Create file1
-            command: echo "1111111" > workspace/file1
-        - persist_to_workspace:
-            root: workspace
-            paths:
-              - file1
+  create-file:
+    executor: default-executor
+    steps:
+      - checkout
+      - run:
+          name: Create file1
+          command: echo "1111111" > workspace/file1
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - file1
 
 workflows:
   version: 2
