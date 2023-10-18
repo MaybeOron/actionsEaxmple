@@ -26,7 +26,7 @@ jobs:
           name: Create file1
           command: |
             mkdir -p workspace
-            echo "1111111" > workspace/file1-<< pipeline.number >>
+            echo -n "1111111" > workspace/file1-<< pipeline.number >>
             ls workspace/
             cat workspace/file1-<< pipeline.number >>
       - persist_to_workspace:
