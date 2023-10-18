@@ -4,6 +4,11 @@ executors:
     docker:
       - image: cimg/python:3.8
 
+parameters:
+  text:
+    type: string
+    default: "EXAMPLE"
+
 jobs:
   create-file1:
     executor: default-executor
@@ -63,7 +68,7 @@ jobs:
           name: update
           command: |
             for file in /tmp/workspace/*; do
-                echo "This is the added line" >> "$file"
+                echo "<< pipeline.parameters.text >>" >> "$file"
             done
       - persist_to_workspace:
           root: /tmp/workspace
