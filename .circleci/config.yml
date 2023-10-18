@@ -18,8 +18,7 @@ jobs:
             cat workspace/file1-${CIRCLE_BUILD_NUM}
       - persist_to_workspace:
           root: workspace
-#          paths:
-#            - file1-${CIRCLE_BUILD_NUM}
+          paths:
 
   update-file:
     executor: default-executor
@@ -34,8 +33,7 @@ jobs:
             echo "2222222" > /tmp/workspace/file2-${CIRCLE_BUILD_NUM}
       - persist_to_workspace:
           root: /tmp/workspace
-#          paths:
-#            - file2
+          paths:
 
   list-files:
     executor: default-executor
