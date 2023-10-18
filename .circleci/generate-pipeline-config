@@ -40,7 +40,7 @@ commands:
               mkdir -p /tmp/workspace
               echo "<< parameters.text >>" > /tmp/workspace/<< parameters.file_name >>-<< pipeline.number >>
               ls /tmp/workspace/
-              cat workspace/<< parameters.file_name >>-<< pipeline.number >>
+              cat /tmp/workspace/<< parameters.file_name >>-<< pipeline.number >>
         - *persist_to_workspace
 
 jobs:
