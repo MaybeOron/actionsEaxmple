@@ -107,7 +107,7 @@ jobs:
             echo "~~~~"
             for file in /tmp/workspace/*; do
                 echo "file name: ~\$file~"
-                echo "<< pipeline.parameters.text >>" >> "\$file"
+                echo "oooooooooo" >> "\$file"
             done
             echo "~~~~"
       - persist_to_workspace:
