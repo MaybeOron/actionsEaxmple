@@ -14,13 +14,13 @@ executors:
 
 references:
   workspace_root: &workspace_root
-    /workspace
+    /tmp/workspace
   attach_workspace: &attach_workspace
     attach_workspace:
       at: *workspace_root
   persist_to_workspace: &persist_to_workspace
     persist_to_workspace:
-      root: /workspace
+      root: /tmp/workspace
       paths:
         - '*'
 
@@ -37,10 +37,10 @@ commands:
         - run:
             name: Create file
             command: |
-              mkdir -p /workspace
-              echo "<< parameters.text >>" > workspace/<< parameters.file_name >>-<< pipeline.number >>
-              ls /workspace/
-              cat /workspace/<< parameters.file_name >>-<< pipeline.number >>
+              mkdir -p /tmp/workspace
+              echo "<< parameters.text >>" > /tmp/workspace/<< parameters.file_name >>-<< pipeline.number >>
+              ls /tmp/workspace/
+              cat workspace/<< parameters.file_name >>-<< pipeline.number >>
         - *persist_to_workspace
 
 jobs:
@@ -73,9 +73,9 @@ jobs:
       - run:
           name: update
           command: |
-            ls /workspace/
+            ls /tmp/workspace/
             echo "~~~~"
-            for file in /workspace/*; do
+            for file in /tmp/workspace/*; do
                 echo "file name: ~\$file~"
                 echo "oooooooooo" >> "\$file"
             done
@@ -91,8 +91,8 @@ jobs:
           name: List files in workspace
           command: |
             ls
-            ls /workspace
-            cat /workspace/*
+            ls /tmp/workspace
+            cat /tmp/workspace/*
 
 
 workflows:
