@@ -1,107 +1,107 @@
-version: 2.1
-
-executors:
-  my-executor:
-    docker:
-      - image: buildpack-deps:jessie
-    working_directory: /tmp
-
-jobs:
-  flow:
-    executor: my-executor
-    steps:
-      - run: mkdir -p workspace
-      - run: echo "Hello, world!" > workspace/echo-output
-
-      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory in the execution
-          # environment which is taken to be the root directory of the workspace.
-          root: workspace
-          # Must be relative path from root
-          paths:
-            - echo-output
-
-  downstream:
-    executor: my-executor
-    steps:
-      - attach_workspace:
-          # Must be absolute path or relative path from working_directory
-          at: /tmp/workspace
-
-      - run: |
-          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
-            echo "It worked!";
-          else
-            echo "Nope!"; exit 1
-          fi
-
-workflows:
-  btd:
-    jobs:
-      - flow
-      - downstream:
-          requires:
-            - flow
-
-
-
 # version: 2.1
+
 # executors:
-#   default-executor:
+#   my-executor:
 #     docker:
-#       - image: cimg/python:3.8
+#       - image: buildpack-deps:jessie
+#     working_directory: /tmp
 
 # jobs:
-#   create-file:
-#     executor: default-executor
+#   flow:
+#     executor: my-executor
 #     steps:
-#       - checkout
-#       - run:
-#           name: Create file1
-#           command: |
-#             mkdir workspace
-#             echo "1111111" > workspace/file1
+#       - run: mkdir -p workspace
+#       - run: echo "Hello, world!" > workspace/echo-output
+
+#       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
 #       - persist_to_workspace:
+#           # Must be an absolute path, or relative path from working_directory. This is a directory in the execution
+#           # environment which is taken to be the root directory of the workspace.
 #           root: workspace
+#           # Must be relative path from root
 #           paths:
-#             - file1
+#             - echo-output
 
-#   update-file:
-#     executor: default-executor
+#   downstream:
+#     executor: my-executor
 #     steps:
-#       - checkout
 #       - attach_workspace:
+#           # Must be absolute path or relative path from working_directory
 #           at: /tmp/workspace
-#       - run:
-#           name: Copy and update file1 to file2
-#           command: |
-#             cp /tmp/workspace/file1 /tmp/workspace/file2
-#             echo "2222222" > workspace/file2
-#       - persist_to_workspace:
-#           root: /tmp/workspace
-#           paths:
-#             - file2
 
-#   list-files:
-#     executor: default-executor
-#     steps:
-#       - checkout
-#       - attach_workspace:
-#           at: /tmp/workspace
-#       - run:
-#           name: List files in workspace
-#           command: ls /tmp/workspace
-
+#       - run: |
+#           if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
+#             echo "It worked!";
+#           else
+#             echo "Nope!"; exit 1
+#           fi
 
 # workflows:
-#   version: 2
-#   build:
+#   btd:
 #     jobs:
-#       - create-file
-#       - update-file:
+#       - flow
+#       - downstream:
 #           requires:
-#             - create-file
-#       - list-files:
-#           requires:
-#             - update-file
+#             - flow
+
+
+
+version: 2.1
+executors:
+  default-executor:
+    docker:
+      - image: cimg/python:3.8
+
+jobs:
+  create-file:
+    executor: default-executor
+    steps:
+      - checkout
+      - run:
+          name: Create file1
+          command: |
+            mkdir -p workspace
+            echo "1111111" > workspace/file1
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - file1
+
+  update-file:
+    executor: default-executor
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Copy and update file1 to file2
+          command: |
+            cp /tmp/workspace/file1 /tmp/workspace/file2
+            echo "2222222" > workspace/file2
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - file2
+
+  list-files:
+    executor: default-executor
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: List files in workspace
+          command: ls /tmp/workspace
+
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - create-file
+      - update-file:
+          requires:
+            - create-file
+      - list-files:
+          requires:
+            - update-file
