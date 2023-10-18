@@ -19,9 +19,10 @@ references:
     attach_workspace:
       at: *workspace_root
   persist_to_workspace: &persist_to_workspace
-    root: workspace
-    paths:
-      - '*'
+    persist_to_workspace:
+      root: workspace
+      paths:
+        - '*'
 
 commands: 
   add-file:
