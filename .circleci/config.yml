@@ -50,7 +50,7 @@ version: 2.1
 executors:
   default-executor:
     docker:
-      - image: cimg/python:3.8
+      - image: buildpack-deps:jessie
 
 jobs:
   create-file:
@@ -70,7 +70,7 @@ jobs:
   update-file:
     executor: default-executor
     steps:
-      - checkout
+      # - checkout
       - attach_workspace:
           at: /tmp/workspace
       - run:
