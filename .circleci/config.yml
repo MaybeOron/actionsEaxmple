@@ -60,9 +60,11 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - run:
-          name: Copy and update file1 to file2
+          name: update
           command: |
-            cp /tmp/workspace/file*-<< pipeline.number >> /tmp/workspace/
+            for file in /tmp/workspace/*; do
+                echo "This is the added line" >> "$file"
+            done
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
