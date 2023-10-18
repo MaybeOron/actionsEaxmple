@@ -11,7 +11,9 @@ jobs:
       - checkout
       - run:
           name: Create file1
-          command: echo "1111111" > workspace/file1
+          command: |
+            mkdir workspace
+            echo "1111111" > workspace/file1
       - persist_to_workspace:
           root: workspace
           paths:
