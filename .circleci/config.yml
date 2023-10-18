@@ -12,6 +12,7 @@ jobs:
       - run: 
           name: Generate Pipeline generated_config.yml file
           command: |
+            chmod +x ./.circleci/generate-pipeline-config
             ./.circleci/generate-pipeline-config
       - continuation/continue:
           parameters: '{}'
