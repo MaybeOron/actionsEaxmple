@@ -49,8 +49,9 @@
 version: 2.1
 executors:
   default-executor:
+  working_directory: /tmp
     docker:
-      - image: buildpack-deps:jessie
+      - image: cimg/python:3.8
 
 jobs:
   create-file:
