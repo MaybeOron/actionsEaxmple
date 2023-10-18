@@ -18,11 +18,6 @@ references:
   attach_workspace: &attach_workspace
     attach_workspace:
       at: *workspace_root
-  persist_to_workspace: &persist_to_workspace
-    persist_to_workspace:
-      root: workspace
-      paths:
-        - '*'
 
 commands: 
   add-file:
@@ -41,7 +36,10 @@ commands:
               echo "<< parameters.text >>" > workspace/<< parameters.file_name >>-<< pipeline.number >>
               ls workspace/
               cat workspace/<< parameters.file_name >>-<< pipeline.number >>
-        - *persist_to_workspace
+        - persist_to_workspace:
+            root: workspace
+            paths:
+              - '*'
 
 jobs:
   create-file1:
@@ -81,7 +79,7 @@ jobs:
             done
             echo "~~~~"
       - persist_to_workspace:
-          root: workspace
+          root: /tmp/workspace
           paths:
             - '*'
 
