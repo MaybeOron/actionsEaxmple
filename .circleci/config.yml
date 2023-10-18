@@ -19,7 +19,7 @@ jobs:
       - persist_to_workspace:
           root: workspace
           paths:
-            - *
+            - '*'
 
   update-file:
     executor: default-executor
@@ -35,7 +35,7 @@ jobs:
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
-            - *
+            - '*'
 
   list-files:
     executor: default-executor
