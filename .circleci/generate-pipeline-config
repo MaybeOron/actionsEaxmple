@@ -14,13 +14,13 @@ executors:
 
 references:
   workspace_root: &workspace_root
-    /tmp/workspace
+    /workspace
   attach_workspace: &attach_workspace
     attach_workspace:
       at: *workspace_root
   persist_to_workspace: &persist_to_workspace
     persist_to_workspace:
-      root: workspace
+      root: /workspace
       paths:
         - '*'
 
@@ -73,9 +73,9 @@ jobs:
       - run:
           name: update
           command: |
-            ls /tmp/workspace/
+            ls /workspace/
             echo "~~~~"
-            for file in /tmp/workspace/*; do
+            for file in /workspace/*; do
                 echo "file name: ~\$file~"
                 echo "oooooooooo" >> "\$file"
             done
@@ -91,8 +91,8 @@ jobs:
           name: List files in workspace
           command: |
             ls
-            ls /tmp/workspace
-            cat /tmp/workspace/*
+            ls /workspace
+            cat /workspace/*
 
 
 workflows:
