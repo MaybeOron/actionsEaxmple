@@ -28,7 +28,6 @@ jobs:
             folder1/.* run-folder1-job true
             folder2/.* run-folder2-job true
             folder3/.* run-folder3-job true
-          base-revision: main
           config-path: .circleci/generated_config.yml
 
 
