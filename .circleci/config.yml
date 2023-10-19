@@ -4,6 +4,8 @@ version: 2.1
 setup: true
 orbs:
   continuation: circleci/continuation@1.0.0
+  path-filtering: circleci/path-filtering@1.0.0
+
 jobs:
   generate-config:
     executor: continuation/default
@@ -14,9 +16,22 @@ jobs:
           command: |
             chmod +x ./.circleci/generate-pipeline-config
             ./.circleci/generate-pipeline-config
-      - continuation/continue:
-          parameters: '{}'
-          configuration_path: .circleci/generated_config.yml
+
+      # - continuation/continue:
+      #     parameters: '{}'
+      #     configuration_path: .circleci/generated_config.yml
+
+
+      - path-filtering/filter:
+          name: check-updated-files
+          mapping: |
+            folder1/.* run-folder1-job true
+            folder2/.* run-folder2-job true
+            folder3/.* run-folder3-job true
+          base-revision: main
+          config-path: .circleci/generated_config.yml
+
+
 workflows:
   setup-workflow:
     jobs:

@@ -24,6 +24,17 @@ references:
       paths:
         - '*'
 
+parameters:
+  run-folder1-job:
+    type: boolean
+    default: false
+  run-folder2-job:
+    type: boolean
+    default: false
+  run-folder3-job:
+    type: boolean
+    default: false
+
 commands: 
   add-file:
       description: add file with params
@@ -98,6 +109,8 @@ jobs:
 workflows:
   version: 2
   build:
+    when:
+      or: [<< pipeline.parameters.run-folder1-job >>, << pipeline.parameters.run-folder2-job >>, << pipeline.parameters.run-folder3-job >>]
     jobs:
       - create-file1
       - create-file2
